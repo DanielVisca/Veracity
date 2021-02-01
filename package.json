@@ -1,0 +1,19 @@
+{
+  "name": "Veracity",
+  "version": "1.0.0",
+  "description": "Veracity: Chrome Extension for True News (CSC495/CSC495) project",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.21.1",
+    "webpack": "^5.19.0"
+  },
+  "devDependencies": {
+    "webpack-cli": "^4.4.0"
+  }
+}
