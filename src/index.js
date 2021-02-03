@@ -6,12 +6,18 @@ const results = document.getElementsByClassName("result-container")
 const loading = document.getElementsByClassName("loading");
 const sentiment = document.getElementsByClassName("sentiment");
 const topic = document.getElementsByClassName("topic");
+const bias = document.getElementsByClassName("bias");
+const factual_reporting = document.getElementsByClassName("factual-reporting");
+const mbfc_url = document.getElementsByClassName("mbfc-url");
+
+
 log(sentiment)
 log(topic)
 log(results)
 let current_url = "";
 // loading.style.display = "none";
 // errors.style.textContent = "";
+results[0].style.display = "none";
 
 // get the button that starts the analysis
 const btn = document.querySelector(".start-btn");
@@ -32,11 +38,14 @@ const analyse_page = async => {
     })
     .then((response) => {
       console.log("response.data")
-      console.log(response.data.sentiment.text)
-      console.log(response.data.topics)
+      console.log(response.data)
       // loading.style.display = "none";
-      sentiment.textContent = response.data.sentiment.text;
-      topic.textContent = response.data.topics;
+      sentiment[0].textContent = response.data.sentiment.text;
+      topic[0].textContent = response.data.topics;
+      bias[0].textContent = response.data.mbfc.Bias
+      factual_reporting[0].textContent = response.data.mbfc["Factual Reporting"]
+      mbfc_url[0].textContent = response.data.mbfc.URL
+      results[0].style.display = "block";
     })
     .catch(error => {
       console.log(error.response)
