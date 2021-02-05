@@ -5,8 +5,8 @@ const log = console.log
 import axios from "axios";
 
 // API endpoint
-// const api = "https://cdbc305686aa.ngrok.io/analysis";
-const api = "https://know-your-news.herokuapp.com/analysis";
+const api = "https://131306059839.ngrok.io/analysis";
+// const api = "https://know-your-news.herokuapp.com/analysis";
 
 // Retrieve elements from html
 const errors = document.getElementsByClassName("errors")[0];
@@ -21,6 +21,11 @@ const mbfc_url = document.getElementsByClassName("mbfc-url")[0];
 const mbfc = document.getElementsByClassName("mbfc")[0];
 const title = document.getElementsByClassName("title")[0];
 const title_sentiment = document.getElementsByClassName("title-sentiment")[0];
+// Related News
+const similar_news_title = document.getElementsByClassName("similar-news-title")[0];
+const similar_news_url = document.getElementsByClassName("similar-news-url")[0];
+const similarity_score = document.getElementsByClassName("similarity-score")[0];
+
 
 // display nothing to begin with
 loading.style.display = "none";
@@ -72,7 +77,11 @@ const analyse_page = () => {
         // else {
         //   mbfc.style.display = "";
         // }
-        // hide loadimg, display results
+        // hide loading, display results
+        similar_news_title.textContent = response.data.related_news.most_similar_title
+        similar_news_url.textContent = response.data.related_news.most_similar_url
+        similarity_score.textContent = response.data.related_news.similarity_score + '%'
+
         loading.style.display = "none";
         results.style.display = "block";
       })
