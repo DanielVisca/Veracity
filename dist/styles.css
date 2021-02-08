@@ -6,3 +6,8 @@
 .result {
     margin-top: 1em;
   }
+
+body{
+    width: 250px;
+    height:450px;
+  }

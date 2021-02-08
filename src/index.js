@@ -34,7 +34,6 @@ const mbfc_url = document.getElementsByClassName("mbfc-url")[0];
 // Related News
 const related_news_container = document.getElementsByClassName("related-news-container")[0]; // holds all related news results
 const similar_news_title = document.getElementsByClassName("similar-news-title")[0];
-const similar_news_url = document.getElementsByClassName("similar-news-url")[0];
 const similarity_score = document.getElementsByClassName("similarity-score")[0];
 
 // Elements displays (what elements can be seen by user to begin with)
@@ -94,6 +93,7 @@ const analyse_page = () => {
           source.textContent = response.data.mbfc.Source
           bias.textContent = response.data.mbfc.Bias
           mbfc_url.textContent = response.data.mbfc.URL
+          mbfc_url.href = response.data.mbfc.URL
           const facts = response.data.mbfc["Factual Reporting"]
           // Factual Reporting is Null when the site is satire
           if (facts == ""){
@@ -112,7 +112,6 @@ const analyse_page = () => {
         if (response.data.related_news != null) {
           similar_news_title.textContent = response.data.related_news.most_similar_title;
           similar_news_title.href = response.data.related_news.most_similar_url;
-          similar_news_url.textContent = response.data.related_news.most_similar_url;
           similarity_score.textContent = response.data.related_news.similarity_score + '%';
           // display related news div
           related_news_container.style.display = "block";
