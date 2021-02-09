@@ -4,10 +4,11 @@ const log = console.log
 
 import axios from "axios";
 
-// API endpoint
+// API endpoints
 // const api = "https://cefbd33dab32.ngrok.io/analysis";
-const api = "https://know-your-news.herokuapp.com/analysis";
-
+const api = "https://know-your-news.herokuapp.com/";
+const analysis_api = api + "analysis";
+const error_report_api = api + "error_report";
 // Retrieve elements from html
 
 // Errors and Loading Elements
@@ -46,6 +47,8 @@ article_container.style.display = "none";
 mbfc_container.style.display = "none";
 related_news_container.style.display = "none";
 
+// make global so error reporting has access to it
+let current_url;
 // declare a method to start the analysis
 /*
 Expected API response
@@ -70,11 +73,11 @@ const analyse_page = () => {
 
   // Retrieve the current tab, this call is async
   chrome.tabs.query({ active: true, currentWindow: true}, function (tabs) {
-    let current_url = tabs[0].url.toString();
+    current_url = tabs[0].url.toString();
 
     // call api
     try {
-      axios.post(api, {
+      axios.post(analysis_api, {
         url: current_url
       })
       .then((response) => {
@@ -105,7 +108,7 @@ const analyse_page = () => {
           const facts = response.data.mbfc["Factual Reporting"]
           // Factual Reporting is Null when the site is satire
           if (facts == ""){
-           factual_reporting.textContent = "Fake News"
+           factual_reporting.textContent = "Comedic News, Non-Factual"
           } else {
             factual_reporting.textContent = facts
           }
@@ -116,8 +119,8 @@ const analyse_page = () => {
         else {
           mbfc_container.style.display = "none";
         }
-
-        if (response.data.related_news != null) {
+        // NOTE: response.data.related_news.similarity_score could be undefined. Need to test if this will fail
+        if (response.data.related_news != null || response.data.related_news.similarity_score != null) {
           similar_news_title.textContent = response.data.related_news.most_similar_title;
           similar_news_title.href = response.data.related_news.most_similar_url;
           similarity_score.textContent = response.data.related_news.similarity_score + '%';
@@ -147,5 +150,28 @@ const analyse_page = () => {
   })
 }
 
+// Error reporting
+const report_error = document.getElementsByClassName("report-error")[0];
+const report_error_text = document.getElementsByClassName("report-error-text")[0];
+
+report_error.addEventListener('click', () => {
+  try {
+    axios.post(error_report_api, {
+      url: current_url
+    })
+    .then((response) => {
+      report_error_text.textContent = "We have been notifed, thank you!"
+    }) 
+    .catch(error => {
+      // NOTE: because I am only using the first index of class report, this inner HTML may not work. Needs to be tested
+      report_error_text.innerHTML = "Uh oh! Our server had an issue. <strong class='report-error'>Try again?</strong>";
+    })
+  } catch (error) {
+    report_error_text.textContent = "Uh oh! It seems our services are down, sorry for the inconvenience!";
+  }
+});
+
+
+// Run when icon selected
 analyse_page();
 
