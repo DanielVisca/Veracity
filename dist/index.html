@@ -9,7 +9,7 @@
     </head>
     <body class="container">
         <div class="result">
-            <div class="errors"></div>
+            <div class="errors box"></div>
             <div class="loading">
                 <p><strong>Loading... </strong><span></span></p>
             </div>
@@ -18,8 +18,12 @@
                     <h3><strong>Article</strong></h3>
                     <p><strong>Title: </strong><span class="title"></span></p>
                     <p><strong>Title Sentiment: </strong><span class="title-sentiment"></span></p>
-                    <p><strong>Topics: </strong><ul class="topic list"></ul></p>
-                    <p><strong>Sentiment: </strong><span class="sentiment"></span></p>
+                    <div class="dropdown">
+                        <p><strong>Topics (hover to see): </strong>
+                            <ul class="topic list"></ul>
+                        </p>
+                    </div>
+                    <p><strong>Article Sentiment: </strong><span class="sentiment"></span></p>
                 </div>
 
                 <div class="mbfc-container box">

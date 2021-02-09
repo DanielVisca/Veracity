@@ -39,8 +39,7 @@ const similarity_score = document.getElementsByClassName("similarity-score")[0];
 // Elements displays (what elements can be seen by user to begin with)
 
 // display nothing to begin with
-errors.style.textContent = "";
-
+errors.style.display = "none";
 loading.style.display = "none";
 results_container.style.display = "none";
 article_container.style.display = "none";
@@ -85,7 +84,6 @@ const analyse_page = () => {
         title.textContent = response.data.title;
         title_sentiment.textContent = response.data.sentiment.title;
         sentiment.textContent = response.data.sentiment.text;
-        // topic.textContent = response.data.topics
       
         // Iterate over topics and add list items
         const topic_list = response.data.topics; // type array
@@ -137,12 +135,14 @@ const analyse_page = () => {
         // Hide loading, display error
         loading.style.display = "none";
         errors.textContent = "Uh oh! Our server said it '" + error.response.data + "'. Try again?";
+        errors.style.display = "block";
         log(error.response) 
       })
     } catch (error) {
       // Hide loading, display error
       loading.style.display = "none";
-      errors.textContent = "Uh oh! It seems our services are down, sorry for the inconvenience!"
+      errors.textContent = "Uh oh! It seems our services are down, sorry for the inconvenience!";
+      errors.style.display = "block";
     }
   })
 }
