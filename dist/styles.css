@@ -6,8 +6,23 @@
 .result {
     margin-top: 1em;
   }
+.box {
+    margin-top: 10px;
+    margin-bottom: 10px;
+    border-radius: 25px;
+    border-style:solid;
+    border-color:#336699;
+    border-width:2px;
+    padding-left:3px;
+    padding-bottom:5px;
+  }
+
+.list {
+  list-style-type: none;
+  /* text-align: left; */
+  padding-left: 8px;
+}
 
 body{
     width: 250px;
-    height:450px;
   }

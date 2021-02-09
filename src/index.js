@@ -85,14 +85,24 @@ const analyse_page = () => {
         title.textContent = response.data.title;
         title_sentiment.textContent = response.data.sentiment.title;
         sentiment.textContent = response.data.sentiment.text;
-        topic.textContent = response.data.topics;
+        // topic.textContent = response.data.topics
+      
+        // Iterate over topics and add list items
+        const topic_list = response.data.topics; // type array
+        for (let i=0; i < topic_list.length; i++) {
+          let item = topic_list[i]
+          const topic_item = document.createElement('li') // create list item
+          const topic_text = document.createTextNode(item) // create text node with topic
+          topic_item.appendChild(topic_text)
+          topic.appendChild(topic_item)
+        }
+        // topic.innerHTML = response.data.topics;
         article_container.style.display = "block";
 
         // media bias data is not null, populate mbfc info
         if (response.data.mbfc != null) {
           source.textContent = response.data.mbfc.Source
           bias.textContent = response.data.mbfc.Bias
-          mbfc_url.textContent = response.data.mbfc.URL
           mbfc_url.href = response.data.mbfc.URL
           const facts = response.data.mbfc["Factual Reporting"]
           // Factual Reporting is Null when the site is satire
