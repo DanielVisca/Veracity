@@ -5,7 +5,6 @@ const log = console.log
 import axios from "axios";
 
 // API endpoints
-// const api = "https://cefbd33dab32.ngrok.io/analysis";
 const api = "https://know-your-news.herokuapp.com/";
 const analysis_api = api + "analysis";
 const error_report_api = api + "error_report";
