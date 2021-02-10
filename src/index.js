@@ -5,6 +5,7 @@ const log = console.log
 import axios from "axios";
 
 // API endpoints
+// const api = "https://dev-know-your-news.herokuapp.com/";
 const api = "https://know-your-news.herokuapp.com/";
 const analysis_api = api + "analysis";
 const error_report_api = api + "error_report";
@@ -35,6 +36,10 @@ const mbfc_url = document.getElementsByClassName("mbfc-url")[0];
 const related_news_container = document.getElementsByClassName("related-news-container")[0]; // holds all related news results
 const similar_news_title = document.getElementsByClassName("similar-news-title")[0];
 const similarity_score = document.getElementsByClassName("similarity-score")[0];
+
+// User Error reporting
+const report_error = document.getElementsByClassName("report-error")[0];
+const report_error_text = document.getElementsByClassName("report-error-text")[0];
 
 // Elements displays (what elements can be seen by user to begin with)
 
@@ -80,9 +85,9 @@ const analyse_page = () => {
         url: current_url
       })
       .then((response) => {
+        log(response)
         // Response is successful
         // Populate Article info
-        
         title.textContent = response.data.title;
         title_sentiment.textContent = response.data.sentiment.title;
         sentiment.textContent = response.data.sentiment.text;
@@ -129,6 +134,12 @@ const analyse_page = () => {
           related_news_container.style.display = "none";
         }
 
+        // Indicate that a a User marked this article as incorrect
+        if ("reported_error" in response.data) {
+          errors.textContent = "A User indicated that our analysis on this Article in incorrect";
+          errors.style.display = "block";
+        }
+
         // hide loading, display results
         loading.style.display = "none";
         results_container.style.display = "block";
@@ -149,9 +160,6 @@ const analyse_page = () => {
   })
 }
 
-// Error reporting
-const report_error = document.getElementsByClassName("report-error")[0];
-const report_error_text = document.getElementsByClassName("report-error-text")[0];
 
 report_error.addEventListener('click', () => {
   try {
