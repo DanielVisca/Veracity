@@ -15,6 +15,9 @@
             </div>
             <div class="result-container">
                 <div class="article-container box">
+
+                    <input class="checkbox" name="error_box" value="article-error" type="checkbox">
+
                     <h3><strong>Article</strong></h3>
                     <p><strong></strong><span class="title"></span></p>
                     <p><strong>Title Sentiment: </strong><span class="title-sentiment"></span></p>
@@ -30,14 +33,20 @@
                 </div>
 
                 <div class="mbfc-container box">
+                    
+                    <input class="checkbox" name="error_box" value="mbfc-error" type="checkbox">
+
                     <h3><strong>Media Bias Fact Checker</strong></h3>
                     <p><strong>Source: </strong><span class="source"></span></p>
                     <p><strong>Political Bias: </strong><span class="bias"></span></p>
                     <p><strong>Factual Reporting: </strong><span class="factual-reporting"></span></p>
-                    <p><strong>More info: </strong><a target="_blank" class="mbfc-url">here</a></p>
+                    <p><strong><a target="_blank" class="mbfc-url">More Info</a></strong></p>
                 </div>
 
                 <div class="related-news-container box">
+
+                    <input class="checkbox" name="error_box" value="related-news-error" type="checkbox">
+
                     <h3><strong>Similar News</strong></h3>
                     <p><strong></strong><a target="_blank" class="similar-news-title"></a></p>
                     <p><strong>Similarity Score: </strong><span class="similarity-score"></span></p>
@@ -45,6 +54,7 @@
 
                 <div class="report-error-container">
                     <p class="report-error-text">Is this incorrect? Click <strong class="report-error">here</strong> and we will look into it</p>
+                    <button id='submit-error-report' class='btn'>Submit Error Report</button>
                 </div>
             </div>
         </div>
